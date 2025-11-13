@@ -1,162 +1,121 @@
+import { useEffect, useState, Fragment } from "react";
+import { formatMoney } from "../utils/money";
 import "./orders.css";
+import axios from "axios";
+import dayjs from "dayjs";
+
 const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    axios.get("/api/orders?expand=products").then((response) => {
+      setOrders(response.data);
+    });
+  }, []);
+
   return (
     <>
-      <div class="header">
-        <div class="left-section">
-          <a href="/" class="header-link">
-            <img class="logo" src="images/logo-white.png" />
-            <img class="mobile-logo" src="images/mobile-logo-white.png" />
+      <div className="header">
+        <div className="left-section">
+          <a href="/" className="header-link">
+            <img className="logo" src="images/logo-white.png" />
+            <img className="mobile-logo" src="images/mobile-logo-white.png" />
           </a>
         </div>
 
-        <div class="middle-section">
-          <input class="search-bar" type="text" placeholder="Search" />
+        <div className="middle-section">
+          <input className="search-bar" type="text" placeholder="Search" />
 
-          <button class="search-button">
-            <img class="search-icon" src="images/icons/search-icon.png" />
+          <button className="search-button">
+            <img className="search-icon" src="images/icons/search-icon.png" />
           </button>
         </div>
 
-        <div class="right-section">
-          <a class="orders-link header-link" href="orders">
-            <span class="orders-text">Orders</span>
+        <div className="right-section">
+          <a className="orders-link header-link" href="orders">
+            <span className="orders-text">Orders</span>
           </a>
 
-          <a class="cart-link header-link" href="checkout">
-            <img class="cart-icon" src="images/icons/cart-icon.png" />
-            <div class="cart-quantity">3</div>
-            <div class="cart-text">Cart</div>
+          <a className="cart-link header-link" href="checkout">
+            <img className="cart-icon" src="images/icons/cart-icon.png" />
+            <div className="cart-quantity">3</div>
+            <div className="cart-text">Cart</div>
           </a>
         </div>
       </div>
 
-      <div class="orders-page">
-        <div class="page-title">Your Orders</div>
+      <div className="orders-page">
+        <div className="page-title">Your Orders</div>
 
-        <div class="orders-grid">
-          <div class="order-container">
-            <div class="order-header">
-              <div class="order-header-left-section">
-                <div class="order-date">
-                  <div class="order-header-label">Order Placed:</div>
-                  <div>August 12</div>
+        <div className="orders-grid">
+          {orders.map((order) => {
+            return (
+              <div className="order-container" key={order.id}>
+                <div className="order-header">
+                  <div className="order-header-left-section">
+                    <div className="order-date">
+                      <div className="order-header-label">Order Placed:</div>
+                      <div>
+                        {dayjs(order.orderTimeMs).format("dddd, MMMM, D")}
+                      </div>
+                    </div>
+                    <div className="order-total">
+                      <div className="order-header-label">Total:</div>
+                      <div>{formatMoney(order.totalCostCents)}</div>
+                    </div>
+                  </div>
+
+                  <div className="order-header-right-section">
+                    <div className="order-header-label">Order ID:</div>
+                    <div>{order.id}</div>
+                  </div>
                 </div>
-                <div class="order-total">
-                  <div class="order-header-label">Total:</div>
-                  <div>$35.06</div>
-                </div>
-              </div>
 
-              <div class="order-header-right-section">
-                <div class="order-header-label">Order ID:</div>
-                <div>27cba69d-4c3d-4098-b42d-ac7fa62b7664</div>
-              </div>
-            </div>
+                <div className="order-details-grid">
+                  {order.products.map((product) => {
+                    return (
+                      <Fragment key={product.id}>
+                        <div className="product-image-container">
+                          <img src={product.product.image} />
+                        </div>
 
-            <div class="order-details-grid">
-              <div class="product-image-container">
-                <img src="images/products/athletic-cotton-socks-6-pairs.jpg" />
-              </div>
+                        <div className="product-details">
+                          <div className="product-name">
+                            {product.product.name}
+                          </div>
+                          <div className="product-delivery-date">
+                            {dayjs(product.estimatedDeliveryTimeMs).format(
+                              "dddd, MMMM, D"
+                            )}
+                          </div>
+                          <div className="product-quantity">
+                            Quantity: {product.quantity}
+                          </div>
+                          <button className="buy-again-button button-primary">
+                            <img
+                              className="buy-again-icon"
+                              src="images/icons/buy-again.png"
+                            />
+                            <span className="buy-again-message">
+                              Add to Cart
+                            </span>
+                          </button>
+                        </div>
 
-              <div class="product-details">
-                <div class="product-name">
-                  Black and Gray Athletic Cotton Socks - 6 Pairs
-                </div>
-                <div class="product-delivery-date">Arriving on: August 15</div>
-                <div class="product-quantity">Quantity: 1</div>
-                <button class="buy-again-button button-primary">
-                  <img
-                    class="buy-again-icon"
-                    src="images/icons/buy-again.png"
-                  />
-                  <span class="buy-again-message">Add to Cart</span>
-                </button>
-              </div>
-
-              <div class="product-actions">
-                <a href="tracking">
-                  <button class="track-package-button button-secondary">
-                    Track package
-                  </button>
-                </a>
-              </div>
-
-              <div class="product-image-container">
-                <img src="images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg" />
-              </div>
-
-              <div class="product-details">
-                <div class="product-name">
-                  Adults Plain Cotton T-Shirt - 2 Pack
-                </div>
-                <div class="product-delivery-date">Arriving on: August 19</div>
-                <div class="product-quantity">Quantity: 2</div>
-                <button class="buy-again-button button-primary">
-                  <img
-                    class="buy-again-icon"
-                    src="images/icons/buy-again.png"
-                  />
-                  <span class="buy-again-message">Add to Cart</span>
-                </button>
-              </div>
-
-              <div class="product-actions">
-                <a href="tracking">
-                  <button class="track-package-button button-secondary">
-                    Track package
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="order-container">
-            <div class="order-header">
-              <div class="order-header-left-section">
-                <div class="order-date">
-                  <div class="order-header-label">Order Placed:</div>
-                  <div>June 10</div>
-                </div>
-                <div class="order-total">
-                  <div class="order-header-label">Total:</div>
-                  <div>$41.90</div>
+                        <div className="product-actions">
+                          <a href="tracking">
+                            <button className="track-package-button button-secondary">
+                              Track package
+                            </button>
+                          </a>
+                        </div>
+                      </Fragment>
+                    );
+                  })}
                 </div>
               </div>
-
-              <div class="order-header-right-section">
-                <div class="order-header-label">Order ID:</div>
-                <div>b6b6c212-d30e-4d4a-805d-90b52ce6b37d</div>
-              </div>
-            </div>
-
-            <div class="order-details-grid">
-              <div class="product-image-container">
-                <img src="images/products/intermediate-composite-basketball.jpg" />
-              </div>
-
-              <div class="product-details">
-                <div class="product-name">Intermediate Size Basketball</div>
-                <div class="product-delivery-date">Arriving on: June 17</div>
-                <div class="product-quantity">Quantity: 2</div>
-                <button class="buy-again-button button-primary">
-                  <img
-                    class="buy-again-icon"
-                    src="images/icons/buy-again.png"
-                  />
-                  <span class="buy-again-message">Add to Cart</span>
-                </button>
-              </div>
-
-              <div class="product-actions">
-                <a href="tracking">
-                  <button class="track-package-button button-secondary">
-                    Track package
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
+            );
+          })}
+          ;
         </div>
       </div>
     </>
