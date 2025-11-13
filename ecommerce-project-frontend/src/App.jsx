@@ -1,6 +1,6 @@
 import "./App.css";
 import axios from "axios";
-import HomePage from "./Components/HomePage";
+import HomePage from "./Components/home/HomePage";
 import Checkout from "./Components/Checkout";
 import Orders from "./Components/Orders";
 import Tracking from "./Components/Tracking";
