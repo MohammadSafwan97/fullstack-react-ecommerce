@@ -1,8 +1,8 @@
 import "./HomePage.css";
 import axios from "axios";
-import "./Header.css";
+import "../Header.css";
 import { Link } from "react-router";
-import Header from "./Header";
+import Header from "../Header";
 import { useEffect, useState } from "react";
 import ProductGrid from "./ProductGrid";
 
@@ -10,17 +10,12 @@ const HomePage = ({ cart }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // ✅ define and call an async function inside useEffect
-
-    try {
-      axios.get("api/products").then((response) => {
-        setProducts(response.data);
-      });
-      // ✅ store data in state
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  }, []); // ✅ run only once when component mounts
+    const fetchHomeData = async () => {
+      const response = await axios.get("api/products");
+      setProducts(response.data);
+    };
+    fetchHomeData();
+  }, []);
 
   return (
     <>

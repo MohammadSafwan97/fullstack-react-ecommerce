@@ -1,47 +1,26 @@
-import { useEffect, useState, Fragment } from "react";
-import { formatMoney } from "../utils/money";
-import "./orders.css";
 import axios from "axios";
 import dayjs from "dayjs";
+import { useState, useEffect, Fragment } from "react";
+import Header from "../Header";
+import { formatMoney } from "../../utils/money";
+import "./OrdersPage.css";
 
-const Orders = () => {
+export default function OrdersPage({ cart }) {
   const [orders, setOrders] = useState([]);
+
   useEffect(() => {
-    axios.get("/api/orders?expand=products").then((response) => {
+    const fetchOrdersData = async () => {
+      const response = await axios.get("/api/orders?expand=products");
       setOrders(response.data);
-    });
+    };
+    fetchOrdersData();
   }, []);
 
   return (
     <>
-      <div className="header">
-        <div className="left-section">
-          <a href="/" className="header-link">
-            <img className="logo" src="images/logo-white.png" />
-            <img className="mobile-logo" src="images/mobile-logo-white.png" />
-          </a>
-        </div>
+      <title>Orders</title>
 
-        <div className="middle-section">
-          <input className="search-bar" type="text" placeholder="Search" />
-
-          <button className="search-button">
-            <img className="search-icon" src="images/icons/search-icon.png" />
-          </button>
-        </div>
-
-        <div className="right-section">
-          <a className="orders-link header-link" href="orders">
-            <span className="orders-text">Orders</span>
-          </a>
-
-          <a className="cart-link header-link" href="checkout">
-            <img className="cart-icon" src="images/icons/cart-icon.png" />
-            <div className="cart-quantity">3</div>
-            <div className="cart-text">Cart</div>
-          </a>
-        </div>
-      </div>
+      <Header cart={cart} />
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>
@@ -49,14 +28,12 @@ const Orders = () => {
         <div className="orders-grid">
           {orders.map((order) => {
             return (
-              <div className="order-container" key={order.id}>
+              <div key={order.id} className="order-container">
                 <div className="order-header">
                   <div className="order-header-left-section">
                     <div className="order-date">
                       <div className="order-header-label">Order Placed:</div>
-                      <div>
-                        {dayjs(order.orderTimeMs).format("dddd, MMMM, D")}
-                      </div>
+                      <div>{dayjs(order.orderTimeMs).format("MMMM D")}</div>
                     </div>
                     <div className="order-total">
                       <div className="order-header-label">Total:</div>
@@ -71,24 +48,25 @@ const Orders = () => {
                 </div>
 
                 <div className="order-details-grid">
-                  {order.products.map((product) => {
+                  {order.products.map((orderProduct) => {
                     return (
-                      <Fragment key={product.id}>
+                      <Fragment key={orderProduct.product.id}>
                         <div className="product-image-container">
-                          <img src={product.product.image} />
+                          <img src={orderProduct.product.image} />
                         </div>
 
                         <div className="product-details">
                           <div className="product-name">
-                            {product.product.name}
+                            {orderProduct.product.name}
                           </div>
                           <div className="product-delivery-date">
-                            {dayjs(product.estimatedDeliveryTimeMs).format(
-                              "dddd, MMMM, D"
+                            Arriving on:{" "}
+                            {dayjs(orderProduct.estimatedDeliveryTimeMs).format(
+                              "MMMM D"
                             )}
                           </div>
                           <div className="product-quantity">
-                            Quantity: {product.quantity}
+                            Quantity: {orderProduct.quantity}
                           </div>
                           <button className="buy-again-button button-primary">
                             <img
@@ -102,7 +80,7 @@ const Orders = () => {
                         </div>
 
                         <div className="product-actions">
-                          <a href="tracking">
+                          <a href="/tracking">
                             <button className="track-package-button button-secondary">
                               Track package
                             </button>
@@ -115,11 +93,8 @@ const Orders = () => {
               </div>
             );
           })}
-          ;
         </div>
       </div>
     </>
   );
-};
-
-export default Orders;
+}
