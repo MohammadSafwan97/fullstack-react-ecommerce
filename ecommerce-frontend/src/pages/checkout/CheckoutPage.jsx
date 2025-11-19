@@ -1,26 +1,32 @@
 import axios from "axios";
-import "./checkout.css";
+import { useState, useEffect } from "react";
+import { OrderSummary } from "./OrderSummary";
+import { PaymentSummary } from "./PaymentSummary";
 import "./checkout-header.css";
-import OrderSummary from "./OrderSummary";
-import PaymentSummary from "./PaymentSummary";
+import "./CheckoutPage.css";
 
-import { useEffect, useState } from "react";
-const Checkout = ({ cart }) => {
+export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [paymentSummary, setPaymentSummary] = useState([]);
+  const [paymentSummary, setPaymentSummary] = useState(null);
+
   useEffect(() => {
-    axios
-      .get("api/delivery-options?expand=estimatedDeliveryTime")
-      .then((response) => {
-        setDeliveryOptions(response.data);
-      });
-    axios.get("api/payment-summary").then((response) => {
+    const fetchCheckoutData = async () => {
+      let response = await axios.get(
+        "/api/delivery-options?expand=estimatedDeliveryTime"
+      );
+      setDeliveryOptions(response.data);
+
+      response = await axios.get("/api/payment-summary");
       setPaymentSummary(response.data);
-    });
-  }, []);
+    };
+
+    fetchCheckoutData();
+  }, [cart]);
 
   return (
     <>
+      <title>Checkout</title>
+
       <div className="checkout-header">
         <div className="header-content">
           <div className="checkout-header-left-section">
@@ -48,12 +54,15 @@ const Checkout = ({ cart }) => {
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} />
-          <PaymentSummary paymentSummary={paymentSummary} />
+          <OrderSummary
+            cart={cart}
+            deliveryOptions={deliveryOptions}
+            loadCart={loadCart}
+          />
+
+          <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
         </div>
       </div>
     </>
   );
-};
-
-export default Checkout;
+}
