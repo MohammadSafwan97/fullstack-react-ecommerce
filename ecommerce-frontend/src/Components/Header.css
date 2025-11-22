@@ -147,3 +147,53 @@
   width: 26px;
   text-align: center;
 }
+
+
+/* LOGO */
+.logo-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Grocery Icon */
+.grocery-icon {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+}
+
+/* Text Logo */
+.safwan-logo {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px; /* Navbar-friendly size */
+  font-weight: 700;
+  letter-spacing: -1px;
+  display: inline-block;
+  background: linear-gradient(90deg, #ffffff, #e6e6e6);
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+.safwan-logo .accent {
+  font-weight: 800;
+}
+
+/* Moving underline */
+.safwan-logo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #e6e6e6, #ffffff);
+  border-radius: 4px;
+  transform: translateX(-10%);
+  animation: slide 2s infinite ease-in-out;
+}
+
+@keyframes slide {
+  0% { transform: translateX(-10%); }
+  50% { transform: translateX(10%); }
+  100% { transform: translateX(-10%); }
+}
