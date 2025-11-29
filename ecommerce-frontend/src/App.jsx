@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
+import AIChatBot from "./Components/AIChatBot";  
 import "./App.css";
 
 function App() {
@@ -19,14 +20,20 @@ function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
-      <Route
-        path="checkout"
-        element={<CheckoutPage cart={cart} loadCart={loadCart} />}
-      />
-      <Route path="orders" element={<OrdersPage cart={cart} />} />
-    </Routes>
+    <>
+      {/* Your normal routes */}
+      <Routes>
+        <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
+        <Route
+          path="checkout"
+          element={<CheckoutPage cart={cart} loadCart={loadCart} />}
+        />
+        <Route path="orders" element={<OrdersPage cart={cart} />} />
+      </Routes>
+
+      
+      <AIChatBot apiBase="http://localhost:4000" />
+    </>
   );
 }
 
