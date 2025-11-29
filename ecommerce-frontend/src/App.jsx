@@ -5,6 +5,7 @@ import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
 import AIChatBot from "./components/chatbot/AIChatBot"; 
+
 import "./App.css";
 
 function App() {

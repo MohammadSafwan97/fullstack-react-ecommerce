@@ -1,9 +1,10 @@
-import React from "react";
 import "./auth.css";
+
 export function Login() {
   return (
     <div>
       <div className="auth-wrap">
+        {/* Left Section */}
         <aside className="auth-hero" aria-hidden="true">
           <div className="brand">
             <div className="logo">D</div>
@@ -35,16 +36,22 @@ export function Login() {
           </div>
         </aside>
 
+        {/* Right Section */}
         <main className="auth-card" role="region" aria-label="Login Form">
-          <h2 className="mb-3" style="font-size: 22px;">
+          <h2 className="mb-3" style={{ fontSize: "22px" }}>
             Login
           </h2>
 
-          <form action="./server/requests.php" method="POST" novalidate>
+          <form
+            action="./server/requests.php"
+            method="POST"
+            noValidate
+          >
             <div className="field">
-              <label>Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 placeholder="you@example.com"
                 required
@@ -52,9 +59,10 @@ export function Login() {
             </div>
 
             <div className="field">
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
+                id="password"
                 name="password"
                 placeholder="••••••••"
                 required
