@@ -1,0 +1,147 @@
+/* Floating Button */
+.chatbot-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #4f46e5;
+  color: white;
+  font-size: 26px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 9999;
+}
+
+/* Chat Window */
+.chatbot-window {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  height: 420px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* Header */
+.chatbot-header {
+  background: #4f46e5;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+}
+
+/* Messages */
+.chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #f9fafb;
+}
+
+/* Message bubble */
+.chat-message {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.chat-message.user {
+  justify-content: flex-end;
+}
+
+.chat-message.assistant {
+  justify-content: flex-start;
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+}
+
+.chat-message.user .chat-bubble {
+  background: #dcfce7;
+  border: none;
+}
+
+chat-message.assistant .chat-bubble {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Input bar */
+.chatbot-input {
+  display: flex;
+  padding: 10px;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+}
+
+.chatbot-input input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* Suggestions */
+.suggestion-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-btn {
+  padding: 6px 10px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.suggestion-btn:hover {
+  background: #e0e7ff;
+}
+
+
+/* Make assistant bubbles render like paragraph blocks and justify text */
+.chat-message.assistant .chat-bubble {
+  display: block;                
+  max-width: 85%;                
+  width: auto;                   
+  padding: 12px;         
+  margin: 0 0 12px 0;     
+  text-align: justify;  
+  text-justify: inter-word;      
+  text-align-last: left;         
+  line-height: 1.45;     
+  word-break: break-word;       
+  hyphens: auto;                
+  background: #ffffff;        
+  border: 1px solid #e5e7eb;     
+  border-radius: 10px;
+}
+
+
+.chat-message.user .chat-bubble {
+  display: inline-block; 
+  max-width: 75%;
+  text-align: left;      
+}
+
+
+.chatbot-messages {
+  padding: 10px 14px;
+  box-sizing: border-box;
+}

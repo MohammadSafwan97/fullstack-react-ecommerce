@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
-import AIChatBot from "./Components/AIChatBot";  
+import AIChatBot from "./components/chatbot/AIChatBot"; 
 import "./App.css";
 
 function App() {
@@ -33,6 +33,7 @@ function App() {
 
       
       <AIChatBot apiBase="http://localhost:4000" />
+
     </>
   );
 }
