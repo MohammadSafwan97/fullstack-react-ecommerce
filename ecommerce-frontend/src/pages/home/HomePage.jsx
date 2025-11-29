@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header';
+import { HeroSection } from '../../components/HeroSection';
 import { ProductsGrid } from './ProductsGrid';
 import './HomePage.css';
 
@@ -17,14 +18,14 @@ export function HomePage({ cart, loadCart }) {
   }, []);
 
   return (
-    <>
+    <div className='HomePage'>
       <title>Ecommerce Project</title>
 
       <Header cart={cart} />
-
+      <HeroSection/>
       <div className="home-page">
         <ProductsGrid products={products} loadCart={loadCart} />
       </div>
-    </>
+    </div>
   );
 }

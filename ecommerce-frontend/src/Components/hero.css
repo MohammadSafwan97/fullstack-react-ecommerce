@@ -1,0 +1,145 @@
+/* ================= HERO SECTION ================= */
+
+.hero-section {
+  margin-top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 100px 40px 60px; /* reduced to align with header */
+  gap: 40px;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto; /* centers hero under header */
+}
+
+.hero-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hero-left h4 {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #888;
+}
+
+.hero-left h1 {
+  font-size: 50px;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.hero-left h1 span {
+  color: #21a067;
+}
+
+.hero-left p {
+  margin: 20px 0;
+  max-width: 350px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 12px 26px;
+  background: #21a067;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.hero-btn:hover {
+  background: #1a8659;
+}
+
+/* RIGHT SIDE IMAGE */
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-right img {
+  width: 450px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+
+
+
+/* ================= RESPONSIVENESS ================= */
+
+/* Large Tablets */
+@media (max-width: 992px) {
+  .hero-section {
+    padding: 80px 30px 50px;
+  }
+
+  .hero-left h1 {
+    font-size: 42px;
+  }
+
+  .hero-right img {
+    width: 380px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .hero-left {
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-left p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-btn {
+    align-self: center;
+  }
+
+  .hero-right {
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .hero-right img {
+    width: 330px;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 50px 16px;
+  }
+
+  .hero-left h1 {
+    font-size: 32px;
+  }
+
+  .hero-left p {
+    font-size: 15px;
+  }
+
+  .hero-right img {
+    width: 280px;
+  }
+}
