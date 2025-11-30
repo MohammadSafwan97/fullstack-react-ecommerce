@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginUser = () => {
-    console.log(email, password);
+  const collectData = () => {
+    console.log(name, email, password);
   };
 
-  const googleLogin = () => console.log("Login with Google");
-  const facebookLogin = () => console.log("Login with Facebook");
+  const googleSignup = () => console.log("Signup with Google");
+  const facebookSignup = () => console.log("Signup with Facebook");
 
   return (
     <section className="text-gray-600 body-font relative">
@@ -18,8 +19,8 @@ const Login = () => {
         {/* LEFT SIDE IMAGE */}
         <div className="hidden md:flex w-1/2 items-center justify-center pr-8">
           <img
-            src="https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7883.jpg?w=826"
-            alt="login"
+            src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?w=826"
+            alt="ecommerce signup"
             className="rounded-2xl shadow-lg object-cover"
           />
         </div>
@@ -30,8 +31,20 @@ const Login = () => {
           w-full mt-10 md:mt-0 relative z-10 shadow-md"
         >
           <h2 className="text-gray-900 text-xl mb-6 font-bold title-font text-center">
-            Login to Your Account
+            Create an Account
           </h2>
+
+          {/* Name */}
+          <div className="relative mb-4">
+            <label className="leading-7 text-sm text-gray-600">Full Name</label>
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 
+              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 
+              leading-8 transition-colors duration-200 ease-in-out"
+            />
+          </div>
 
           {/* Email */}
           <div className="relative mb-4">
@@ -40,8 +53,8 @@ const Login = () => {
               type="email"
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 
-              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3
-              leading-8 transition-colors duration-200 ease-in-out"
+              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 
+              px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
 
@@ -51,50 +64,40 @@ const Login = () => {
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500
-              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3
-              leading-8 transition-colors duration-200 ease-in-out"
+              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 
+              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 
+              px-3 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
 
-          {/* Login Button */}
+          {/* Email/Password Signup Button */}
           <button
-            onClick={loginUser}
+            onClick={collectData}
             className="text-white bg-indigo-500 border-0 py-2 px-6 
             focus:outline-none hover:bg-indigo-600 rounded text-lg"
           >
-            Login
+            Sign Up
           </button>
 
-          {/* Forgot Password */}
-          <div className="text-right mt-2">
-            <Link
-              to="/forgot-password"
-              className="text-sm text-indigo-500 hover:underline"
-            >
-              Forgot Password?
-            </Link>
-          </div>
-
-          {/* Don't have account */}
+          {/* Already have account */}
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
-              Don't have an account?{" "}
-              <Link to="/signup" className="text-indigo-500 hover:underline">
-                Sign Up
+              Already have an account?{" "}
+              <Link to="/login" className="text-indigo-500 hover:underline">
+                Login
               </Link>
             </p>
           </div>
 
           {/* Divider */}
           <div className="text-center text-gray-500 my-4">
-            — OR Login With —
+            — OR Sign Up With —
           </div>
 
-          {/* Social Logins */}
-          <div className="flex flex-col gap-3">
+          {/* Social Signup Buttons BELOW */}
+          <div className="flex flex-col gap-3 mb-6">
             <button
-              onClick={googleLogin}
+              onClick={googleSignup}
               className="w-full flex items-center justify-center gap-3 border py-2 rounded 
               hover:bg-gray-100 transition"
             >
@@ -107,7 +110,7 @@ const Login = () => {
             </button>
 
             <button
-              onClick={facebookLogin}
+              onClick={facebookSignup}
               className="w-full flex items-center justify-center gap-3 border py-2 rounded 
               hover:bg-gray-100 transition"
             >
@@ -119,10 +122,14 @@ const Login = () => {
               Facebook
             </button>
           </div>
+
+          <p className="text-xs text-gray-500 mt-3 text-center">
+            By signing up, you agree to our Terms & Privacy Policy.
+          </p>
         </div>
       </div>
     </section>
   );
 };
 
-export default Login;
+export default Signup;
