@@ -8,6 +8,7 @@ import AIChatBot from "./components/chatbot/AIChatBot";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import ProductDetail from "./Components/ProductDetail";
 
 import "./App.css";
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="about" element={<ProductDetail />} />
       </Routes>
 
       <AIChatBot apiBase="http://localhost:4000" />
