@@ -4,6 +4,7 @@ import { Header } from "../../components/Header";
 import { HeroSection } from "../../components/HeroSection";
 import { ProductsGrid } from "./ProductsGrid";
 import { FeaturedCategories } from "../../Components/FeaturedCategories";
+import { ShopByCategory } from "./ShopByCategory";
 import "./HomePage.css";
 
 export function HomePage({ cart, loadCart }) {
@@ -25,6 +26,7 @@ export function HomePage({ cart, loadCart }) {
       <Header cart={cart} />
       <HeroSection />
       <FeaturedCategories />
+      <ShopByCategory />
       <div className="home-page">
         <ProductsGrid products={products} loadCart={loadCart} />
       </div>
