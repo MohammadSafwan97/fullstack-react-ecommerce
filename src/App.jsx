@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
-import AIChatBot from "./components/chatbot/AIChatBot";
+import AIChatBot from "./components/ChatBot/AIChatBot.jsx";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import ForgotPassword from "./pages/auth/ForgotPassword";
