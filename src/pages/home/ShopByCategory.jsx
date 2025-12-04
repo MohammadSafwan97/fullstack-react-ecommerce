@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export function ShopByCategory() {
+export default function ShopByCategory() {
   const categories = [
     {
       name: "Electronics",

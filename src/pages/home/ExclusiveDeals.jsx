@@ -1,4 +1,4 @@
-export function ExclusiveDeals() {
+export default function ExclusiveDeals() {
   return (
     <section className="w-full py-20 bg-[#FFF6F2]">
       <div className="max-w-3xl mx-auto text-center px-6">

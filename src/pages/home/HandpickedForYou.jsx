@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export function HandpickedForYou() {
+export default function HandpickedForYou() {
   const items = [
     {
       name: "Wireless Noise-Cancelling Headphones",

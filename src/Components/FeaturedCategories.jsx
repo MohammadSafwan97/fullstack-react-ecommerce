@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export function FeaturedCategories() {
+export default function FeaturedCategories() {
   const categories = [
     {
       name: "Electronics",

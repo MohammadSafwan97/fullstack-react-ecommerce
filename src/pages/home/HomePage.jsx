@@ -1,13 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Header } from "../../components/Header";
-import { HeroSection } from "../../components/HeroSection";
-import { ProductsGrid } from "./ProductsGrid";
-import { FeaturedCategories } from "../../Components/FeaturedCategories";
-import { ShopByCategory } from "./ShopByCategory";
-import { ExclusiveDeals } from "./ExclusiveDeals";
-import { HandpickedForYou } from "./HandpickedForYou";
-import { Footer } from "./Footer";
+
+import Header from "@components/Header";
+import HeroSection from "@components/HeroSection";
+import FeaturedCategories from "@components/FeaturedCategories";
+
+import ShopByCategory from "./ShopByCategory";
+import ExclusiveDeals from "./ExclusiveDeals";
+import HandpickedForYou from "./HandpickedForYou";
+import ProductsGrid from "./ProductsGrid";
+import Footer from "./Footer";
+
 import "./HomePage.css";
 
 export function HomePage({ cart, loadCart }) {
@@ -32,9 +35,9 @@ export function HomePage({ cart, loadCart }) {
       <ShopByCategory />
       <ExclusiveDeals />
       <HandpickedForYou />
+
       <div className="home-page">
         <ProductsGrid products={products} loadCart={loadCart} />
-
         <Footer />
       </div>
     </div>
