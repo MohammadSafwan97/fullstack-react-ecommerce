@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
-import AIChatBot from "./components/chatbot/AIChatBot.jsx";
 
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
@@ -40,8 +39,6 @@ function App() {
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="about" element={<ProductDetail />} />
       </Routes>
-
-      <AIChatBot apiBase="http://localhost:4000" />
     </>
   );
 }
