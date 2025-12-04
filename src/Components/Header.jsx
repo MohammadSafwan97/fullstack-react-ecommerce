@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useState } from "react";
-export function Header({ cart }) {
+export default function Header({ cart }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   let totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (

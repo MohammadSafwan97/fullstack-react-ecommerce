@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Header } from "../../components/Header";
-import { HeroSection } from "../../components/HeroSection";
+import Header from "@components/Header";
+import HeroSection from "@components/HeroSection";
 import { ProductsGrid } from "./ProductsGrid";
-import { FeaturedCategories } from "../../Components/FeaturedCategories";
+import FeaturedCategories from "@components/FeaturedCategories";
 import { ShopByCategory } from "./ShopByCategory";
 import { ExclusiveDeals } from "./ExclusiveDeals";
 import { HandpickedForYou } from "./HandpickedForYou";

@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import "./hero.css";
-export function HeroSection() {
+export default function HeroSection() {
   const images = [
     "/images/products/artistic-bowl-set-6-piece.jpg",
     "/images/products/bathroom-mat.jpg",
