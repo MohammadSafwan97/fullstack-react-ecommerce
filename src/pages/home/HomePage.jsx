@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "@components/Header";
 import HeroSection from "@components/HeroSection";
+import AIChatBot from "@components/chatbot/AIChatBot";
 import { ProductsGrid } from "./ProductsGrid";
 import FeaturedCategories from "@components/FeaturedCategories";
 import { ShopByCategory } from "./ShopByCategory";
@@ -34,7 +35,7 @@ export function HomePage({ cart, loadCart }) {
       <HandpickedForYou />
       <div className="home-page">
         <ProductsGrid products={products} loadCart={loadCart} />
-
+        <AIChatBot />
         <Footer />
       </div>
     </div>
