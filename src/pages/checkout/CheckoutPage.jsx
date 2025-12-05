@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { OrderSummary } from "./OrderSummary";
 import { PaymentSummary } from "./PaymentSummary";
+import { api } from "@/api/api"; // 👈 NEW: use your API helper
 import "./checkout-header.css";
 import "./CheckoutPage.css";
 
@@ -11,13 +11,20 @@ export function CheckoutPage({ cart, loadCart }) {
 
   useEffect(() => {
     const fetchCheckoutData = async () => {
-      let response = await axios.get(
-        "/api/delivery-options?expand=estimatedDeliveryTime"
-      );
-      setDeliveryOptions(response.data);
+      try {
+        // 👇 Automatically calls:
+        // Local: http://localhost:3000/api/delivery-options
+        // Prod:  https://your-backend.up.railway.app/api/delivery-options
+        let response = await api.get(
+          "/api/delivery-options?expand=estimatedDeliveryTime"
+        );
+        setDeliveryOptions(response.data);
 
-      response = await axios.get("/api/payment-summary");
-      setPaymentSummary(response.data);
+        response = await api.get("/api/payment-summary");
+        setPaymentSummary(response.data);
+      } catch (err) {
+        console.error("Error loading checkout data:", err);
+      }
     };
 
     fetchCheckoutData();
