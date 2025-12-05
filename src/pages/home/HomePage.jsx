@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Header from "@components/Header";
-import HeroSection from "@components/HeroSection";
-import AIChatBot from "@components/chatbot/AIChatBot";
+import Header from "@Components/Header";
+import HeroSection from "@Components/HeroSection";
+import AIChatBot from "@Components/chatbot/AIChatBot";
 import { ProductsGrid } from "./ProductsGrid";
-import FeaturedCategories from "@components/FeaturedCategories";
+import FeaturedCategories from "@Components/FeaturedCategories";
 import { ShopByCategory } from "./ShopByCategory";
 import { ExclusiveDeals } from "./ExclusiveDeals";
 import { HandpickedForYou } from "./HandpickedForYou";
