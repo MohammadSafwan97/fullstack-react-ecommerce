@@ -5,20 +5,26 @@ import { HomePage } from "./pages/home/HomePage";
 import { ProductPage } from "./pages/home/ProductPage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
-
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ProductDetail from "./Components/ProductDetail";
 
+import { API_BASE } from "./api/products.js";
 import "./App.css";
 
 function App() {
   const [cart, setCart] = useState([]);
 
+  const USER_ID = 1; // static for now
+
   const loadCart = async () => {
-    const response = await axios.get("/api/cart-items?expand=product");
-    setCart(response.data);
+    try {
+      const response = await axios.get(`${API_BASE}/cart/${USER_ID}`);
+      setCart(response.data.items || []);
+    } catch (error) {
+      console.error("Error loading cart:", error);
+    }
   };
 
   useEffect(() => {
@@ -38,6 +44,7 @@ function App() {
           element={<CheckoutPage cart={cart} loadCart={loadCart} />}
         />
         <Route path="orders" element={<OrdersPage cart={cart} />} />
+
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
