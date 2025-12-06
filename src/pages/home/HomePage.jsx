@@ -16,7 +16,9 @@ export function HomePage({ cart, loadCart }) {
 
   useEffect(() => {
     const getHomeData = async () => {
-      const response = await axios.get("/api/products");
+      const response = await axios.get(
+        "https://ecommerce-backend-production-849a.up.railway.app/products"
+      );
       setProducts(response.data);
     };
 

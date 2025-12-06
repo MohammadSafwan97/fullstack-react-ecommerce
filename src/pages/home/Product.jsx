@@ -42,7 +42,7 @@ export function Product({ product, loadCart }) {
         {/* PRICE BADGE */}
         <div className="absolute top-3 right-3 bg-white px-3 py-1 rounded-full shadow-md">
           <span className="text-gray-900 font-semibold text-sm">
-            {formatMoney(product.priceCents)}
+            {formatMoney(product.price_cents)}
           </span>
         </div>
       </div>
@@ -70,10 +70,10 @@ export function Product({ product, loadCart }) {
           <div className="flex items-center gap-2 text-sm">
             <div className="flex items-center gap-1.5">
               <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <span className="text-gray-700">{product.rating.stars}</span>
+              <span className="text-gray-700">{product.rating_stars}</span>
             </div>
             <span className="text-xs text-gray-500">
-              ({product.rating.count})
+              {product.rating_count}
             </span>
           </div>
 
