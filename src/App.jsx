@@ -2,6 +2,7 @@ import axios from "axios";
 import { Routes, Route } from "react-router";
 import { useState, useEffect } from "react";
 import { HomePage } from "./pages/home/HomePage";
+import { ProductPage } from "./pages/home/ProductPage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
 
@@ -26,9 +27,12 @@ function App() {
 
   return (
     <>
-      {/* Your normal routes */}
       <Routes>
         <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
+        <Route
+          path="products"
+          element={<ProductPage cart={cart} loadCart={loadCart} />}
+        />
         <Route
           path="checkout"
           element={<CheckoutPage cart={cart} loadCart={loadCart} />}
@@ -37,7 +41,8 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="about" element={<ProductDetail />} />
+
+        <Route path="/product/:id" element={<ProductDetail />} />
       </Routes>
     </>
   );

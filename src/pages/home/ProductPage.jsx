@@ -11,7 +11,7 @@ import { HandpickedForYou } from "./HandpickedForYou";
 import { Footer } from "./Footer";
 import "./HomePage.css";
 import { getAllProducts } from "../../api/products.js";
-export function HomePage({ cart, loadCart }) {
+export function ProductPage({ cart, loadCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function HomePage({ cart, loadCart }) {
       <title>Ecommerce Project</title>
 
       <Header cart={cart} />
-      <HeroSection />
+
       <FeaturedCategories />
       <ShopByCategory />
       <ExclusiveDeals />
