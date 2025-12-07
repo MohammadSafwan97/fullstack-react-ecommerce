@@ -1,13 +1,34 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import { API_BASE } from "../../utils/fetchData.js";
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
 
-  const collectData = () => {
-    console.log(name, email, password);
+  // Replace with your Railway backend URL
+  const BACKEND_URL = `${API_BASE}/auth/signup`;
+
+  const collectData = async () => {
+    setMsg("Processing...");
+
+    try {
+      const res = await axios.post(BACKEND_URL, {
+        full_name: name,
+        email,
+        password,
+      });
+
+      setMsg("Signup successful! Redirecting...");
+
+      // Optional redirect to login
+      // setTimeout(() => (window.location.href = "/login"), 1500);
+    } catch (err) {
+      console.error(err);
+      setMsg(err.response?.data?.error || "Signup failed, try again.");
+    }
   };
 
   const googleSignup = () => console.log("Signup with Google");
@@ -33,6 +54,13 @@ const Signup = () => {
           <h2 className="text-gray-900 text-xl mb-6 font-bold title-font text-center">
             Create an Account
           </h2>
+
+          {/* Show message */}
+          {msg && (
+            <p className="text-center mb-4 text-indigo-600 font-medium">
+              {msg}
+            </p>
+          )}
 
           {/* Name */}
           <div className="relative mb-4">
@@ -70,7 +98,7 @@ const Signup = () => {
             />
           </div>
 
-          {/* Email/Password Signup Button */}
+          {/* Signup Button */}
           <button
             onClick={collectData}
             className="text-white bg-indigo-500 border-0 py-2 px-6 
@@ -94,7 +122,7 @@ const Signup = () => {
             — OR Sign Up With —
           </div>
 
-          {/* Social Signup Buttons BELOW */}
+          {/* Social Signup */}
           <div className="flex flex-col gap-3 mb-6">
             <button
               onClick={googleSignup}

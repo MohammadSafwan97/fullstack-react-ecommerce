@@ -1,12 +1,36 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_BASE } from "../../utils/fetchData.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
-  const loginUser = () => {
-    console.log(email, password);
+  const BACKEND_URL = `${API_BASE}/auth/signin`;
+
+  const loginUser = async () => {
+    setMsg("Processing...");
+
+    try {
+      const res = await axios.post(BACKEND_URL, {
+        email,
+        password,
+      });
+
+      // Save token so user stays logged in
+      localStorage.setItem("token", res.data.access_token);
+
+      setMsg("Login successful! Redirecting...");
+
+      // redirect to homepage (or any page)
+      setTimeout(() => navigate("/"), 1200);
+    } catch (err) {
+      console.error(err);
+      setMsg(err.response?.data?.error || "Login failed");
+    }
   };
 
   const googleLogin = () => console.log("Login with Google");
@@ -32,6 +56,9 @@ const Login = () => {
           <h2 className="text-gray-900 text-xl mb-6 font-bold title-font text-center">
             Login to Your Account
           </h2>
+
+          {/* Show message */}
+          {msg && <p className="text-center mb-4 text-indigo-600">{msg}</p>}
 
           {/* Email */}
           <div className="relative mb-4">
