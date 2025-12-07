@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // <-- added
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import API_BASE from "../../utils/fetchData.js";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -9,7 +8,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
-  const navigate = useNavigate(); // <-- added
+  const navigate = useNavigate();
 
   const BACKEND_URL = `https://ecommerce-backend-production-849a.up.railway.app/auth/signup`;
 
@@ -17,14 +16,14 @@ const Signup = () => {
     setMsg("Processing...");
 
     try {
-      // 1️⃣ SIGNUP USER
+      // Step 1: Signup user
       await axios.post(BACKEND_URL, {
         full_name: name,
         email,
         password,
       });
 
-      // 2️⃣ AUTO-LOGIN USER RIGHT AFTER SIGNUP
+      // Step 2: Auto-login
       const loginRes = await axios.post(
         "https://ecommerce-backend-production-849a.up.railway.app/auth/signin",
         {
@@ -33,12 +32,14 @@ const Signup = () => {
         }
       );
 
-      // 3️⃣ SAVE TOKEN
+      // Step 3: Save token + user_id
       localStorage.setItem("token", loginRes.data.access_token);
+
+      // 🔥 Required for Add-to-Cart
+      localStorage.setItem("user_id", loginRes.data.user.id);
 
       setMsg("Signup successful! Redirecting...");
 
-      // 4️⃣ Redirect to home
       setTimeout(() => navigate("/"), 800);
     } catch (err) {
       console.error(err);
@@ -46,27 +47,21 @@ const Signup = () => {
     }
   };
 
-  const googleSignup = () => console.log("Signup with Google");
-  const facebookSignup = () => console.log("Signup with Facebook");
-
   return (
     <section className="text-gray-600 body-font relative">
       <div className="container px-5 py-24 mx-auto flex justify-center">
-        {/* LEFT SIDE IMAGE */}
+        {/* LEFT IMAGE */}
         <div className="hidden md:flex w-1/2 items-center justify-center pr-8">
           <img
             src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?w=826"
-            alt="ecommerce signup"
+            alt="signup"
             className="rounded-2xl shadow-lg object-cover"
           />
         </div>
 
-        {/* RIGHT SIDE FORM */}
-        <div
-          className="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col
-          w-full mt-10 md:mt-0 relative z-10 shadow-md"
-        >
-          <h2 className="text-gray-900 text-xl mb-6 font-bold title-font text-center">
+        {/* SIGNUP FORM */}
+        <div className="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col shadow-md">
+          <h2 className="text-gray-900 text-xl mb-6 font-bold text-center">
             Create an Account
           </h2>
 
@@ -76,52 +71,43 @@ const Signup = () => {
             </p>
           )}
 
-          {/* Name */}
           <div className="relative mb-4">
             <label className="leading-7 text-sm text-gray-600">Full Name</label>
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
               className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 
-              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 
-              leading-8 transition-colors duration-200 ease-in-out"
+              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3"
             />
           </div>
 
-          {/* Email */}
           <div className="relative mb-4">
             <label className="leading-7 text-sm text-gray-600">Email</label>
             <input
               type="email"
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 
-              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 
-              px-3 leading-8 transition-colors duration-200 ease-in-out"
+              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3"
             />
           </div>
 
-          {/* Password */}
           <div className="relative mb-4">
             <label className="leading-7 text-sm text-gray-600">Password</label>
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 
-              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 
-              px-3 leading-8 transition-colors duration-200 ease-in-out"
+              focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3"
             />
           </div>
 
-          {/* Signup Button */}
           <button
             onClick={collectData}
-            className="text-white bg-indigo-500 border-0 py-2 px-6 
-            focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            className="text-white bg-indigo-500 py-2 px-6 rounded hover:bg-indigo-600"
           >
             CREATE YOUR ACCOUNT
           </button>
 
-          {/* Already have account */}
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
@@ -130,44 +116,6 @@ const Signup = () => {
               </Link>
             </p>
           </div>
-
-          {/* Divider */}
-          <div className="text-center text-gray-500 my-4">
-            — OR Sign Up With —
-          </div>
-
-          {/* Social Signup */}
-          <div className="flex flex-col gap-3 mb-6">
-            <button
-              onClick={googleSignup}
-              className="w-full flex items-center justify-center gap-3 border py-2 rounded 
-              hover:bg-gray-100 transition"
-            >
-              <img
-                src="https://www.svgrepo.com/show/355037/google.svg"
-                className="w-5"
-                alt="google"
-              />
-              Google
-            </button>
-
-            <button
-              onClick={facebookSignup}
-              className="w-full flex items-center justify-center gap-3 border py-2 rounded 
-              hover:bg-gray-100 transition"
-            >
-              <img
-                src="https://www.svgrepo.com/show/475647/facebook-color.svg"
-                className="w-5"
-                alt="facebook"
-              />
-              Facebook
-            </button>
-          </div>
-
-          <p className="text-xs text-gray-500 mt-3 text-center">
-            By signing up, you agree to our Terms & Privacy Policy.
-          </p>
         </div>
       </div>
     </section>

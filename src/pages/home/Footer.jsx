@@ -12,13 +12,12 @@ export function Footer() {
               🛒
             </div>
             <span className="text-xl font-semibold text-gray-900">
-              Commerce Hub
+              SafwanExpress
             </span>
           </div>
 
           <p className="text-gray-600 text-sm leading-relaxed">
-            Your ultimate destination for quality products and seamless
-            shopping.
+            Fast, reliable, and convenient shopping — delivered your way.
           </p>
 
           {/* SOCIAL ICONS */}
@@ -102,7 +101,7 @@ export function Footer() {
 
       {/* COPYRIGHT BAR */}
       <div className="border-t border-gray-300 py-4 text-center text-gray-600 text-sm">
-        © {new Date().getFullYear()} Commerce Hub. All rights reserved.
+        © {new Date().getFullYear()} SafwanExpress. All rights reserved.
       </div>
     </footer>
   );

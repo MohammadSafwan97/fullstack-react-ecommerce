@@ -25,17 +25,16 @@ export default function HeroSection() {
         {/* LEFT SECTION — ORIGINAL TEXT STYLE PRESERVED */}
         <div className="hero-text space-y-4">
           <h4 className="text-primary text-base font-semibold tracking-wide">
-            STEEL BOTTLE
+            QUALITY FIRST
           </h4>
 
           <h1 className="text-5xl font-extrabold text-gray-900 leading-tight">
-            WHICH NEEDED <br />
-            <span className="text-primary">EVERYDAY</span>
+            SHOP SMARTER <br />
+            <span className="text-primary">LIVE BETTER</span>
           </h1>
 
           <p className="text-gray-600 max-w-md text-lg leading-relaxed">
-            Lorem ipsum is simply dummy text of the printing and typesetting
-            industry.
+            Explore timeless pieces made with superior materials and care.
           </p>
 
           <Link

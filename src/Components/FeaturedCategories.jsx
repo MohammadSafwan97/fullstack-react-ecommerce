@@ -5,7 +5,7 @@ export default function FeaturedCategories() {
     {
       name: "Electronics",
       image:
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35b0?q=80&w=800",
+        "https://plus.unsplash.com/premium_photo-1661539136670-892155a8644e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZWxlY3Ryb25pYyUyMHNob3B8ZW58MHx8MHx8fDA%3D",
       link: "/products?category=electronics",
     },
     {
@@ -41,7 +41,7 @@ export default function FeaturedCategories() {
     {
       name: "Kitchen",
       image:
-        "https://images.unsplash.com/photo-1585238341985-3b91fc0b9f4a?q=80&w=800",
+        "https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=499&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1585238341985-3b91fc0b9f4a?q=80&w=800",
       link: "/products?category=kitchen",
     },
   ];

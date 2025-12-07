@@ -1,13 +1,19 @@
 import axios from "axios";
-import { Routes, Route } from "react-router";
+import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+
+import Header from "./Components/Header";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import { HomePage } from "./pages/home/HomePage";
 import { ProductPage } from "./pages/home/ProductPage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
+
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+
 import ProductDetail from "./Components/ProductDetail";
 
 import { API_BASE } from "./api/products.js";
@@ -33,23 +39,49 @@ function App() {
 
   return (
     <>
+      {/* HEADER ALWAYS VISIBLE */}
+      <Header cart={cart} />
+
       <Routes>
+        {/* HOME */}
         <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
+
+        {/* PRODUCTS */}
         <Route
           path="products"
           element={<ProductPage cart={cart} loadCart={loadCart} />}
         />
+
+        {/* 🔐 PROTECTED CHECKOUT */}
         <Route
           path="checkout"
-          element={<CheckoutPage cart={cart} loadCart={loadCart} />}
+          element={
+            <ProtectedRoute>
+              <CheckoutPage cart={cart} loadCart={loadCart} />
+            </ProtectedRoute>
+          }
         />
-        <Route path="orders" element={<OrdersPage cart={cart} />} />
 
+        {/* 🔐 PROTECTED ORDERS */}
+        <Route
+          path="orders"
+          element={
+            <ProtectedRoute>
+              <OrdersPage cart={cart} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* AUTH */}
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
 
-        <Route path="/product/:id" element={<ProductDetail />} />
+        {/* PRODUCT DETAILS */}
+        <Route
+          path="/product/:id"
+          element={<ProductDetail loadCart={loadCart} />}
+        />
       </Routes>
     </>
   );

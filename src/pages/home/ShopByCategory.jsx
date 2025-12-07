@@ -5,7 +5,7 @@ export function ShopByCategory() {
     {
       name: "Electronics",
       image:
-        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200",
+        "https://plus.unsplash.com/premium_photo-1661539136670-892155a8644e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZWxlY3Ryb25pYyUyMHNob3B8ZW58MHx8MHx8fDA%3D",
       link: "/products?category=electronics",
     },
     {
