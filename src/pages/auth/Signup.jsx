@@ -17,18 +17,29 @@ const Signup = () => {
     setMsg("Processing...");
 
     try {
-      const res = await axios.post(BACKEND_URL, {
+      // 1️⃣ SIGNUP USER
+      await axios.post(BACKEND_URL, {
         full_name: name,
         email,
         password,
       });
 
+      // 2️⃣ AUTO-LOGIN USER RIGHT AFTER SIGNUP
+      const loginRes = await axios.post(
+        "https://ecommerce-backend-production-849a.up.railway.app/auth/signin",
+        {
+          email,
+          password,
+        }
+      );
+
+      // 3️⃣ SAVE TOKEN
+      localStorage.setItem("token", loginRes.data.access_token);
+
       setMsg("Signup successful! Redirecting...");
 
-      // Redirect to home page after success (1 second delay)
-      setTimeout(() => {
-        navigate("/"); // <-- redirect to home
-      }, 1000);
+      // 4️⃣ Redirect to home
+      setTimeout(() => navigate("/"), 800);
     } catch (err) {
       console.error(err);
       setMsg(err.response?.data?.error || "Signup failed, try again.");
