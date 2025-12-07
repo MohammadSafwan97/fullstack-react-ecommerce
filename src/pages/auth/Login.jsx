@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_BASE } from "../../utils/fetchData.js";
+import API_BASE from "../../utils/fetchData.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ const Login = () => {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
-  const BACKEND_URL = `${API_BASE}/auth/signin`;
+  const BACKEND_URL = `https://ecommerce-backend-production-849a.up.railway.app/auth/signin`;
 
   const loginUser = async () => {
     setMsg("Processing...");

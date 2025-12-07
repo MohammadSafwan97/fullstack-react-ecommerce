@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_BASE } from "../../utils/fetchData.js";
+import API_BASE from "../../utils/fetchData.js";
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
-  // Replace with your Railway backend URL
-  const BACKEND_URL = `${API_BASE}/auth/signup`;
+  const BACKEND_URL = `https://ecommerce-backend-production-849a.up.railway.app/auth/signup`;
 
   const collectData = async () => {
     setMsg("Processing...");
