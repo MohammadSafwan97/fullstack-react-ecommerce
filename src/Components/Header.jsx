@@ -39,10 +39,11 @@ export default function Header({ cart }) {
   return (
     <>
       <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-12 py-4 flex items-center justify-between">
           {/* LOGO */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 ">
             <svg
+              class="32"
               width="32"
               height="32"
               viewBox="0 0 24 24"
