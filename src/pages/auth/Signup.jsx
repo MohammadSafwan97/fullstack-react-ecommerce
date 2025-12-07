@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // <-- added
 import axios from "axios";
 import API_BASE from "../../utils/fetchData.js";
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
+
+  const navigate = useNavigate(); // <-- added
 
   const BACKEND_URL = `https://ecommerce-backend-production-849a.up.railway.app/auth/signup`;
 
@@ -22,8 +25,10 @@ const Signup = () => {
 
       setMsg("Signup successful! Redirecting...");
 
-      // Optional redirect to login
-      // setTimeout(() => (window.location.href = "/login"), 1500);
+      // Redirect to home page after success (1 second delay)
+      setTimeout(() => {
+        navigate("/"); // <-- redirect to home
+      }, 1000);
     } catch (err) {
       console.error(err);
       setMsg(err.response?.data?.error || "Signup failed, try again.");
@@ -54,7 +59,6 @@ const Signup = () => {
             Create an Account
           </h2>
 
-          {/* Show message */}
           {msg && (
             <p className="text-center mb-4 text-indigo-600 font-medium">
               {msg}
