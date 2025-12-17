@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
+import {AIChatBot} from "./chatbot/AIChatBot";
+import {Login} from "./pages/auth/Login";
+import {Signup} from "./pages/auth/Signup";
 import "./App.css";
 
 function App() {
@@ -19,14 +22,21 @@ function App() {
   }, []);
 
   return (
-    <Routes>
+    <div>
+      <Routes>
       <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
       <Route
         path="checkout"
         element={<CheckoutPage cart={cart} loadCart={loadCart} />}
       />
       <Route path="orders" element={<OrdersPage cart={cart} />} />
+      <Route path="login" element={<Login/>} />
+      <Route path="signup" element={<Signup/>} />
     </Routes>
+    <AIChatBot/>
+    </div>
+    
+    
   );
 }
 
