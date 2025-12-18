@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
+import { api } from "@/config/api";
 
 export function Login() {
   const navigate = useNavigate();
@@ -18,31 +19,22 @@ export function Login() {
     }
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
+      const res = await api.post("/api/auth/login", {
+        email,
+        password,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Login failed");
-        return;
-      }
-
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", res.data.token);
       navigate("/");
-    } catch {
-      setError("Server error");
+    } catch (err) {
+      setError(err.response?.data?.error || "Login failed");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <Header />
+
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900">
