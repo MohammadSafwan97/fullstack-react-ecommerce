@@ -1,49 +1,78 @@
-import { useState, useMemo } from "react";
+import axios from "axios";
+import { useState, useEffect, useMemo } from "react";
 import { ProductsGrid } from "../home/ProductsGrid";
+import { Header } from "../../Components/Header";
 
+export function ProductsPage() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export function ProductsPage({ products = [], loadCart }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [sort, setSort] = useState("default");
 
-  // Get unique categories
+  
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const res = await axios.get("/api/products");
+        
+        setProducts(Array.isArray(res.data) ? res.data : res.data.products || []);
+      } catch (err) {
+        console.error("Failed to load products", err);
+        setProducts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
+  
   const categories = useMemo(() => {
     const cats = products.map((p) => p.category).filter(Boolean);
     return ["all", ...new Set(cats)];
   }, [products]);
 
-  // Filter + sort products
+ 
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    // Search
     if (search.trim()) {
       result = result.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase())
+        (p.name || "").toLowerCase().includes(search.toLowerCase())
       );
     }
 
-    // Category
     if (category !== "all") {
       result = result.filter((p) => p.category === category);
     }
 
-    // Sort
     if (sort === "price-low") {
-      result.sort((a, b) => a.priceCents - b.priceCents);
+      result.sort((a, b) => (a.priceCents || 0) - (b.priceCents || 0));
     } else if (sort === "price-high") {
-      result.sort((a, b) => b.priceCents - a.priceCents);
+      result.sort((a, b) => (b.priceCents || 0) - (a.priceCents || 0));
     } else if (sort === "rating") {
-      result.sort((a, b) => b.rating.stars - a.rating.stars);
+      result.sort(
+        (a, b) => (b.rating?.stars || 0) - (a.rating?.stars || 0)
+      );
     }
 
     return result;
   }, [products, search, category, sort]);
 
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center text-slate-500">
+        Loading products...
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* PAGE HEADER */}
+     <Header/>
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-slate-900">
           Products
@@ -53,7 +82,7 @@ export function ProductsPage({ products = [], loadCart }) {
         </p>
       </div>
 
-      {/* CONTROLS */}
+      {/* FILTERS */}
       <div className="bg-white border border-slate-200 rounded-xl p-4 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* SEARCH */}
@@ -107,14 +136,14 @@ export function ProductsPage({ products = [], loadCart }) {
         </div>
       </div>
 
-      {/* RESULT COUNT */}
+      {/* COUNT */}
       <div className="mb-4 text-sm text-slate-500">
         Showing {filteredProducts.length} products
       </div>
 
-      {/* PRODUCTS GRID */}
+      {/* GRID */}
       {filteredProducts.length > 0 ? (
-        <ProductsGrid products={filteredProducts} loadCart={loadCart} />
+        <ProductsGrid products={filteredProducts} />
       ) : (
         <div className="text-center py-20 text-slate-500">
           No products found

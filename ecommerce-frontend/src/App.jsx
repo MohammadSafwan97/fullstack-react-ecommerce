@@ -7,7 +7,9 @@ import { OrdersPage } from "./pages/orders/OrdersPage";
 import {AIChatBot} from "./chatbot/AIChatBot";
 import {Login} from "./pages/auth/Login";
 import {Signup} from "./pages/auth/Signup";
-import{ProductsPage} from "./pages/Product/ProductsPage";
+import {ProductsPage} from "./pages/Product/ProductsPage";
+import {AboutPage} from "./pages/about/AboutPage";
+import {ContactPage} from "./pages/contact/ContactPage";
 import "./App.css";
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
       <Route path="login" element={<Login/>} />
       <Route path="signup" element={<Signup/>} />
       <Route path="products" element={<ProductsPage/>} />
+       <Route path="about" element={<AboutPage/>} />
+      <Route path="contact" element={<ContactPage/>} />
     </Routes>
     <AIChatBot/>
     </div>
