@@ -35,7 +35,7 @@ export function AboutPage() {
             </p>
 
             <p>
-              I enjoy working across the full stack — from designing clean,
+              I enjoy  working across the full stack — from designing clean,
               accessible interfaces to writing well-structured backend logic.
               My focus is always on maintainability, clarity, and long-term
               quality.
