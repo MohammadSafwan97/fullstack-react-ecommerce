@@ -4,12 +4,13 @@ import { useState, useEffect, Fragment } from "react";
 import { Header } from "../../components/Header";
 import { formatMoney } from "../../utils/money";
 import "./OrdersPage.css";
+import { api } from "@/config/api";
 
 export function OrdersPage({ cart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/orders?expand=products").then((response) => {
+    api.get("/api/orders?expand=products").then((response) => {
       setOrders(response.data);
     });
   }, []);
