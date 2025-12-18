@@ -90,14 +90,7 @@ export  function Header({ cart = [] }) {
 
           {/* RIGHT SIDE */}
           <div className="flex items-center gap-4">
-            {/* SEARCH */}
-            <div className="hidden lg:flex items-center bg-gray-50 border rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-green-600">
-              <input
-                type="text"
-                placeholder="Search products"
-                className="bg-transparent outline-none w-56 text-sm"
-              />
-            </div>
+         
 
             {/* AUTH */}
             {!loadingUser && (
