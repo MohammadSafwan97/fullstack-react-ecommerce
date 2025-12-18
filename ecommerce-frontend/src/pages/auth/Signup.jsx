@@ -11,7 +11,8 @@ export function Signup() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const SIGNUP_API = "http://localhost:3000/api/auth/signup";
+  const SIGNUP_API = `${import.meta.env.VITE_API_URL}/api/auth/signup`;
+
 
   const handleSignup = async () => {
     setError("");
