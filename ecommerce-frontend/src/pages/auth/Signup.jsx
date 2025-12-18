@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import axios from "axios";
 import { Header } from "../../components/Header";
+import { api } from "@/config/api";
 
 export function Signup() {
   const [name, setName] = useState("");
@@ -9,10 +9,8 @@ export function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
-
-  const SIGNUP_API = `${import.meta.env.VITE_API_URL}/api/auth/signup`;
-
 
   const handleSignup = async () => {
     setError("");
@@ -28,10 +26,10 @@ export function Signup() {
     }
 
     try {
-      const res = await axios.post(SIGNUP_API, {
+      const res = await api.post("/api/auth/signup", {
         name,
         email,
-        password
+        password,
       });
 
       localStorage.setItem("token", res.data.token);
@@ -44,6 +42,7 @@ export function Signup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 mt-10">
       <Header />
+
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900">
