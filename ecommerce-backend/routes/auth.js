@@ -8,10 +8,10 @@ const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret';
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password required' });
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'Name, email and password required' });
     }
 
     const existingUser = await User.findOne({ where: { email } });
@@ -20,7 +20,12 @@ router.post('/signup', async (req, res, next) => {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, passwordHash });
+
+    const user = await User.create({
+      name,
+      email,
+      passwordHash
+    });
 
     const token = jwt.sign(
       { userId: user.id },
@@ -61,6 +66,30 @@ router.post('/login', async (req, res, next) => {
     res.json({ token });
   } catch (err) {
     next(err);
+  }
+});
+
+router.get('/user', async (req, res, next) => {
+  try {
+    const header = req.headers.authorization;
+    if (!header) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const token = header.split(' ')[1];
+    const payload = jwt.verify(token, JWT_SECRET);
+
+    const user = await User.findByPk(payload.userId, {
+      attributes: ['id', 'name', 'email']
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ user });
+  } catch {
+    res.status(401).json({ error: 'Unauthorized' });
   }
 });
 

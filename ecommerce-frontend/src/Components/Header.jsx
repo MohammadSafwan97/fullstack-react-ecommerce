@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export  function Header({ cart = [] }) {
+export function Header({ cart = [] }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
@@ -12,10 +12,11 @@ export  function Header({ cart = [] }) {
     0
   );
 
-  const USER_API = `${import.meta.env.VITE_API_URL}/auth/user`;
+  const USER_API = "http://localhost:3000/api/auth/user";
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (!token) {
       setLoadingUser(false);
       return;
@@ -23,12 +24,14 @@ export  function Header({ cart = [] }) {
 
     axios
       .get(USER_API, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
       .then((res) => setUser(res.data.user))
       .catch(() => {
-        setUser(null);
         localStorage.removeItem("token");
+        setUser(null);
       })
       .finally(() => setLoadingUser(false));
   }, []);
@@ -41,10 +44,8 @@ export  function Header({ cart = [] }) {
 
   return (
     <>
-      {/* HEADER */}
       <header className="fixed top-0 left-0 w-full z-50 bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          {/* LOGO */}
           <Link to="/" className="flex items-center gap-2">
             <svg
               width="28"
@@ -66,7 +67,6 @@ export  function Header({ cart = [] }) {
             </span>
           </Link>
 
-          {/* DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
             {["Home", "Products", "About", "Contact"].map((item) => (
               <Link
@@ -88,11 +88,7 @@ export  function Header({ cart = [] }) {
             )}
           </nav>
 
-          {/* RIGHT SIDE */}
           <div className="flex items-center gap-4">
-         
-
-            {/* AUTH */}
             {!loadingUser && (
               <>
                 {user ? (
@@ -113,7 +109,6 @@ export  function Header({ cart = [] }) {
               </>
             )}
 
-            {/* CART */}
             <Link to="/checkout" className="relative group">
               <div className="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center shadow group-hover:bg-green-800 transition">
                 <svg
@@ -139,7 +134,6 @@ export  function Header({ cart = [] }) {
               )}
             </Link>
 
-            {/* MOBILE MENU BUTTON */}
             <button
               aria-label="Open menu"
               className="md:hidden text-2xl text-green-700 focus:outline-none"
@@ -150,7 +144,6 @@ export  function Header({ cart = [] }) {
           </div>
         </div>
 
-        {/* MOBILE NAV */}
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t shadow-sm px-6 py-4 space-y-3">
             {["Home", "Products", "About", "Contact"].map((item) => (
@@ -193,7 +186,6 @@ export  function Header({ cart = [] }) {
         )}
       </header>
 
-      {/* SPACER */}
       <div className="h-20" />
     </>
   );
