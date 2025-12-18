@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect, useMemo } from "react";
 import { ProductsGrid } from "../home/ProductsGrid";
 import { Header } from "../../components/Header";
+import { api } from "@/config/api";
 
 export function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ export function ProductsPage() {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const res = await axios.get("/api/products");
+        const res = await api.get("/api/products");
         
         setProducts(Array.isArray(res.data) ? res.data : res.data.products || []);
       } catch (err) {
