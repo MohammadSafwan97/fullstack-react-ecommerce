@@ -1,6 +1,6 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { api } from "@/config/api";
 
 export function Header({ cart = [] }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,8 +12,6 @@ export function Header({ cart = [] }) {
     0
   );
 
-  const USER_API = "http://localhost:3000/api/auth/user";
-
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -22,18 +20,23 @@ export function Header({ cart = [] }) {
       return;
     }
 
-    axios
-      .get(USER_API, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then((res) => setUser(res.data.user))
-      .catch(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await api.get("/api/auth/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(res.data.user);
+      } catch (err) {
         localStorage.removeItem("token");
         setUser(null);
-      })
-      .finally(() => setLoadingUser(false));
+      } finally {
+        setLoadingUser(false);
+      }
+    };
+
+    fetchUser();
   }, []);
 
   const logout = () => {

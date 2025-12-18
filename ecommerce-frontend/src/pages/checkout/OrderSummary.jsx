@@ -2,6 +2,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { formatMoney } from "../../utils/money";
 import { DeliveryOptions } from "./DeliveryOptions";
+import { api } from "@/config/api";
 
 export function OrderSummary({ cart, deliveryOptions, loadCart }) {
   return (
@@ -15,7 +16,7 @@ export function OrderSummary({ cart, deliveryOptions, loadCart }) {
           );
 
           const deleteCartItem = async () => {
-            await axios.delete(`/api/cart-items/${cartItem.productId}`);
+            await api.delete(`/api/cart-items/${cartItem.productId}`);
             await loadCart();
           };
 
