@@ -1,18 +1,23 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Header } from '../../components/Header';
-import { ProductsGrid } from './ProductsGrid';
-import {HeroSection} from './HeroSection';
+import { useEffect, useState } from "react";
+import { Header } from "../../components/Header";
+import { ProductsGrid } from "./ProductsGrid";
+import { HeroSection } from "./HeroSection";
+import { api } from "@/config/api";
 
-import './HomePage.css';
-import './hero.css';
+import "./HomePage.css";
+import "./hero.css";
+
 export function HomePage({ cart, loadCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const getHomeData = async () => {
-      const response = await axios.get('/api/products');
-      setProducts(response.data);
+      try {
+        const response = await api.get("/api/products");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Failed to load products", error);
+      }
     };
 
     getHomeData();
@@ -25,8 +30,7 @@ export function HomePage({ cart, loadCart }) {
       <Header cart={cart} />
 
       <div className="home-page">
-        <HeroSection/>
-        
+        <HeroSection />
         <ProductsGrid products={products} loadCart={loadCart} />
       </div>
     </>
