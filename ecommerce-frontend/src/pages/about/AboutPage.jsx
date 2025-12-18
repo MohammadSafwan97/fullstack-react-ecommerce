@@ -52,7 +52,7 @@ export function AboutPage() {
           <div className="mt-24 space-y-14">
             <Value
               title="Quality over quantity"
-              description="I focus on doing fewer things well rather than many things poorly."
+              description="I  focus on doing fewer things well rather than many things poorly."
             />
             <Value
               title="User-first thinking"
@@ -83,7 +83,7 @@ function Value({ title, description }) {
       <h3 className="mb-3 text-2xl font-medium text-slate-900 leading-snug">
         {title}
       </h3>
-      <p className="text-lg text-slate-600 leading-relaxed">
+      <p className="text-lg text-slate-600 leading-relaxed ">
         {description}
       </p>
     </div>
