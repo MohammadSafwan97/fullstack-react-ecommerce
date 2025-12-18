@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import axios from "axios";
-import { Header } from "../../Components/Header";
+import { Header } from "../../components/Header";
 
 export function Signup() {
   const [name, setName] = useState("");

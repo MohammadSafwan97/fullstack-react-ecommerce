@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useMemo } from "react";
 import { ProductsGrid } from "../home/ProductsGrid";
-import { Header } from "../../Components/Header";
+import { Header } from "../../components/Header";
 
 export function ProductsPage() {
   const [products, setProducts] = useState([]);
